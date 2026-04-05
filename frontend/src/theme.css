@@ -1,0 +1,58 @@
+body {
+  background: #f5f7fa;
+  font-family: 'Inter', sans-serif;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(79,70,229,0.10);
+  padding: 24px;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(99,102,241,0.18);
+  transform: translateY(-8px) scale(1.035);
+}
+.btn-primary {
+  background: linear-gradient(90deg, #4f46e5 0%, #6366f1 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+  padding: 0.6rem 1.5rem;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.btn-primary:hover {
+  background: linear-gradient(90deg, #6366f1 0%, #4f46e5 100%);
+  box-shadow: 0 4px 16px rgba(99,102,241,0.16);
+  transform: scale(1.04);
+}
+.btn-outline-red {
+  border: 1.5px solid #ef4444;
+  color: #ef4444;
+  background: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.6rem 1.5rem;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+}
+.btn-outline-red:hover {
+  background: #ef4444;
+  color: #fff;
+}
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+@media (max-width: 1024px) {
+  .grid-responsive { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .grid-responsive { grid-template-columns: 1fr; }
+}

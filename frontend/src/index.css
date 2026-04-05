@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  font-family: 'Manrope', 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f3f4f6;
+  color: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

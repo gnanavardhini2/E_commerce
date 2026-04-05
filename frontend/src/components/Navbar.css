@@ -1,0 +1,114 @@
+.navbar-badge {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: #ef4444;
+  color: #fff;
+  border-radius: 9999px;
+  padding: 0 7px;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  z-index: 1;
+}
+/* Navbar.css */
+
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #1e293b;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(30,41,59,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  overflow: hidden;
+}
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+  color: #00c2ff;
+}
+.search-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.search-bar {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px 12px;
+  border-radius: 0.5rem;
+  background: #334155;
+  color: #fff;
+  border: 1px solid #475569;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.18s;
+}
+.nav-links a:hover {
+  color: #00c2ff;
+}
+.navbar-search-input:focus {
+  box-shadow: 0 0 0 2px #4f46e5;
+}
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar-link.active {
+  color: #06b6d4;
+  font-weight: bold;
+  border-bottom: 2px solid #06b6d4;
+}
+.navbar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.navbar-link:hover {
+  color: #4f46e5;
+}
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.navbar-logout {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.navbar-logout:hover {
+  background: #dc2626;
+}

@@ -1,0 +1,209 @@
+/* Home.css */
+.home-bg {
+  min-height: 100vh;
+  background: #f3f4f6;
+  font-family: 'Inter', sans-serif;
+}
+/* Premium Hero Section */
+.hero {
+  background: linear-gradient(100deg, #2563eb 0%, #0891b2 100%);
+  color: #fff;
+  padding: 2.5rem 0 1.5rem 0;
+  text-align: center;
+  border-radius: 0 0 2rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 24px rgba(79,70,229,0.10);
+}
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+.hero-btn {
+  background: #fff;
+  color: #4f46e5;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(79,70,229,0.08);
+  transition: background 0.2s, color 0.2s;
+}
+.hero-btn:hover {
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.section-title {
+  font-weight: 800;
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+}
+
+.toast-message {
+  position: fixed;
+  top: 84px;
+  right: 24px;
+  background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  box-shadow: 0 10px 26px rgba(29, 78, 216, 0.28);
+  font-weight: 600;
+}
+/* Premium Products Section */
+.products-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem 2rem 1.25rem;
+}
+
+.products-search-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.products-filters-wrap {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.products-filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.products-filter-search input {
+  max-width: 100%;
+}
+
+.products-filter-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.products-select {
+  width: 100%;
+  border-radius: 0.75rem;
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1.5px solid #e0e7ef;
+  outline: none;
+  font-size: 0.95rem;
+  padding: 0.62rem 0.75rem;
+  box-shadow: 0 1px 4px rgba(99,102,241,0.04);
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+.products-select:focus {
+  border: 1.5px solid #6366f1;
+  box-shadow: 0 0 0 2px #6366f1;
+}
+
+.products-filter-actions {
+  align-self: end;
+}
+
+.products-filter-actions .ghost-link-btn {
+  height: 42px;
+  padding: 0 16px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+@media (max-width: 1024px) {
+  .products-filters-wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .products-filter-actions {
+    grid-column: span 2;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+@media (max-width: 640px) {
+  .products-filters-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .products-filter-actions {
+    grid-column: span 1;
+  }
+
+  .products-filter-actions .ghost-link-btn {
+    width: 100%;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+/* Premium Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  color: #64748b;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(99,102,241,0.08);
+  margin-top: 1.5rem;
+}
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #4f46e5;
+}
+.empty-state-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.empty-state-subtext {
+  font-size: 1rem;
+  color: #94a3b8;
+}
+/* Premium Search Bar */
+.navbar-search-input {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.6rem 2.5rem 0.6rem 2.5rem;
+  border-radius: 0.75rem;
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1.5px solid #e0e7ef;
+  outline: none;
+  font-size: 1rem;
+  box-shadow: 0 1px 4px rgba(99,102,241,0.04);
+  transition: box-shadow 0.3s, border 0.3s;
+}
+.navbar-search-input:focus {
+  border: 1.5px solid #6366f1;
+  box-shadow: 0 0 0 2px #6366f1;
+}
