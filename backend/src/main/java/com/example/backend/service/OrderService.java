@@ -111,7 +111,7 @@ public class OrderService {
     }
 
     private String buildOrderConfirmationHtml(User user, Order order) {
-        String orderLink = frontendBaseUrl + "/orders/" + order.getId();
+        String orderLink = frontendBaseUrl + "/#/orders/" + order.getId();
         return "<div style='font-family: Arial, sans-serif; color: #111827; line-height: 1.6;'>"
                 + "<h2 style='margin:0 0 12px 0;'>Order Confirmed - #" + order.getId() + "</h2>"
                 + "<p>Hello " + user.getName() + ",</p>"
@@ -131,7 +131,7 @@ public class OrderService {
     }
 
     private String buildOrderStatusHtml(Order order) {
-        String orderLink = frontendBaseUrl + "/orders/" + order.getId();
+        String orderLink = frontendBaseUrl + "/#/orders/" + order.getId();
         return "<div style='font-family: Arial, sans-serif; color: #111827; line-height: 1.6;'>"
                 + "<h2 style='margin:0 0 12px 0;'>Order Update - #" + order.getId() + "</h2>"
                 + "<p>" + statusMessage(order.getStatus()) + "</p>"

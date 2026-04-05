@@ -100,7 +100,7 @@ public class AuthController {
             String baseUrl = resolveFrontendBaseUrl(origin, referer, httpRequest);
 
             tokenOpt.ifPresent(token -> {
-                String resetLink = baseUrl + "/reset-password?token=" + token;
+                String resetLink = baseUrl + "/#/reset-password?token=" + token;
                 String subject = "Reset your VardhiniChaiCart password";
                 String html = """
                         <div style=\"font-family:Arial,sans-serif;line-height:1.6;color:#0f172a\">
