@@ -5,14 +5,12 @@ WORKDIR /app
 
 COPY pom.xml .
 COPY .mvn .mvn
-COPY mvnw .
-RUN chmod +x mvnw
 
 # Pre-fetch dependencies for faster incremental builds
-RUN ./mvnw -q -DskipTests dependency:go-offline
+RUN mvn -q -DskipTests dependency:go-offline
 
 COPY src src
-RUN ./mvnw -DskipTests clean package
+RUN mvn -DskipTests clean package
 
 FROM eclipse-temurin:17-jre
 WORKDIR /app
