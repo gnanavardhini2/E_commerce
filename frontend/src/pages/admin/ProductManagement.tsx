@@ -16,7 +16,11 @@ type Product = {
 
 const FALLBACK_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' font-size='12' fill='%2364748b' text-anchor='middle' dominant-baseline='middle'%3ENo Image%3C/text%3E%3C/svg%3E";
 
-const BACKEND_ORIGIN = (process.env.REACT_APP_API_URL || 'http://localhost:8080/api').replace(/\/api\/?$/, '');
+const BACKEND_ORIGIN = (
+  process.env.REACT_APP_API_BASE_URL ||
+  process.env.REACT_APP_API_URL ||
+  'http://localhost:8080/api'
+).replace(/\/api\/?$/, '');
 
 const CATEGORY_OPTIONS = [
   'Electronics',

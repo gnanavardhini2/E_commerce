@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, XCircle, Clock, Info } from "lucide-react";
-import axios from "axios";
 import API from "../api";
 import "./Home.css";
 import "./UserPanel.css";
@@ -197,14 +196,7 @@ const OrdersPage = () => {
     }
 
     try {
-      const token = localStorage.getItem("token");
-      await axios.put(
-        `http://localhost:8080/api/orders/${orderId}/cancel`,
-        {},
-        {
-          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-        }
-      );
+      await API.put(`/orders/${orderId}/cancel`, {});
 
       // Update UI instantly
       updateOrderStatus(orderId, "CANCELLED");
