@@ -1,0 +1,7 @@
+target
+node_modules
+uploads
+.git
+.gitignore
+.vscode
+*.log
