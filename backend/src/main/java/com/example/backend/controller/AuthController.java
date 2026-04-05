@@ -16,6 +16,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
+    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+
     private final UserService userService;
     private final JwtService jwtService;
     @org.springframework.beans.factory.annotation.Autowired
@@ -114,7 +118,9 @@ public class AuthController {
 
             return ResponseEntity.ok(Map.of("message", "If your email is registered, you will receive a reset link shortly."));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(Map.of("error", "Failed to process forgot password request"));
+            log.error("Forgot password failed for {}", request.getEmail(), e);
+            String message = e.getMessage() == null ? "Failed to process forgot password request" : e.getMessage();
+            return ResponseEntity.status(500).body(Map.of("error", message));
         }
     }
 
