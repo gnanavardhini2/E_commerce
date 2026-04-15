@@ -36,6 +36,12 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getUserOrders());
     }
 
+    // Public: Track order by id from email link
+    @GetMapping("/track/{orderId}")
+    public ResponseEntity<OrderDto> trackOrder(@PathVariable Long orderId) {
+        return ResponseEntity.ok(orderService.getOrderForTracking(orderId));
+    }
+
     // Admin: Get all orders
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")

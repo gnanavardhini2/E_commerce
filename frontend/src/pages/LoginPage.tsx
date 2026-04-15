@@ -14,7 +14,7 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 import API from '../api';
@@ -29,7 +29,15 @@ const LoginPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
+
+  const redirectPath =
+    (location.state as { from?: { pathname?: string; search?: string; hash?: string } } | null)?.from
+      ? `${(location.state as { from: { pathname?: string; search?: string; hash?: string } }).from.pathname || '/'}${
+          (location.state as { from: { pathname?: string; search?: string; hash?: string } }).from.search || ''
+        }${(location.state as { from: { pathname?: string; search?: string; hash?: string } }).from.hash || ''}`
+      : null;
 
   const validateForm = () => {
     let isValid = true;
@@ -77,7 +85,7 @@ const LoginPage: React.FC = () => {
         if (res.data.user?.role === 'ADMIN') {
           navigate('/admin/dashboard');
         } else {
-          navigate('/');
+          navigate(redirectPath || '/');
         }
       }
     } catch (error: any) {

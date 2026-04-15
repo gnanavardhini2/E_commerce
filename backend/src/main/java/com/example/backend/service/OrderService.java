@@ -268,6 +268,12 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+    public OrderDto getOrderForTracking(Long orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
+        return toDto(order);
+    }
+
     public List<OrderDto> getAllOrders() {
         return orderRepository.findAll().stream().map(this::toDto).collect(Collectors.toList());
     }

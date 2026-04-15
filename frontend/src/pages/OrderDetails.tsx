@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useShop } from "../context/ShopContext";
+import API from "../api";
 import { CheckCircle, Clock } from "lucide-react";
 import "./Home.css";
 import "./UserPanel.css";
@@ -34,13 +35,15 @@ export default function OrderDetails() {
   const navigate = useNavigate();
   const { orders, refreshOrders } = useShop();
   const [hasAttemptedRefresh, setHasAttemptedRefresh] = React.useState(false);
-  const order = orders.find((o) => String(o.id) === id);
+  const [publicOrder, setPublicOrder] = React.useState<any | null>(null);
+  const [isLoadingPublicOrder, setIsLoadingPublicOrder] = React.useState(false);
+  const order = publicOrder || orders.find((o) => String(o.id) === id);
   const statusMeta = order ? getStatusMeta(order.status) : null;
   const normalizedStatus = order ? normalizeStatus(order.status) : "";
+  const isLoggedIn = !!localStorage.getItem('token');
 
   React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!id || !token || order || hasAttemptedRefresh) return;
+    if (!id || !isLoggedIn || order || hasAttemptedRefresh) return;
 
     const load = async () => {
       try {
@@ -51,9 +54,43 @@ export default function OrderDetails() {
     };
 
     load();
-  }, [id, order, hasAttemptedRefresh, refreshOrders]);
+  }, [id, isLoggedIn, order, hasAttemptedRefresh, refreshOrders]);
 
-  if (!order && !hasAttemptedRefresh && localStorage.getItem('token')) {
+  React.useEffect(() => {
+    if (!id || isLoggedIn || order || isLoadingPublicOrder) return;
+
+    const loadPublicOrder = async () => {
+      try {
+        setIsLoadingPublicOrder(true);
+        const res = await API.get(`/orders/track/${id}`);
+        const apiOrder = res.data;
+        const mapped = {
+          id: Number(apiOrder.id),
+          items: (apiOrder.items || []).map((item: any) => ({
+            product: {
+              id: Number(item.productId),
+              name: item.productName,
+              price: Number(item.price),
+              imageUrl: item.productImageUrl || '',
+            },
+            quantity: Number(item.quantity),
+          })),
+          total: Number(apiOrder.totalPrice || 0),
+          createdAt: apiOrder.createdAt,
+          status: apiOrder.status,
+        };
+        setPublicOrder(mapped);
+      } catch (error) {
+        setPublicOrder(null);
+      } finally {
+        setIsLoadingPublicOrder(false);
+      }
+    };
+
+    loadPublicOrder();
+  }, [id, isLoggedIn, order, isLoadingPublicOrder]);
+
+  if ((!order && !hasAttemptedRefresh && isLoggedIn) || (!order && !isLoggedIn && isLoadingPublicOrder)) {
     return (
       <div className="home-bg user-shell" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div className="surface-card" style={{ padding: 30, fontWeight: 700, color: '#334155' }}>
@@ -101,7 +138,7 @@ export default function OrderDetails() {
           </div>
           <div className="summary-divider" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            {order.items.map((item) => (
+            {order.items.map((item: any) => (
               <div key={item.product.id} className="order-item-detail">
                 <img
                   src={item.product.imageUrl || FALLBACK_IMAGE}

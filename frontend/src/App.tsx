@@ -42,6 +42,9 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route element={<Layout />}>
+              <Route path="/orders/:id" element={<OrderDetails />} />
+            </Route>
 
             {/* Protected user dashboard (HomePage) */}
             <Route element={<ProtectedRoute />}>
@@ -52,7 +55,6 @@ function App() {
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/wishlist" element={<WishlistPage />} />
                 <Route path="/orders" element={<OrdersPage />} />
-                <Route path="/orders/:id" element={<OrderDetails />} />
               </Route>
             </Route>
 
