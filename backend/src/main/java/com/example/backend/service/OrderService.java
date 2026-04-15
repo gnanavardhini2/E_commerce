@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
+import jakarta.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
@@ -61,7 +63,13 @@ public class OrderService {
 
     @Transactional
     public OrderDto placeOrder(PlaceOrderRequest request) {
+        return placeOrder(request, null, null, null);
+    }
+
+    @Transactional
+    public OrderDto placeOrder(PlaceOrderRequest request, String origin, String referer, HttpServletRequest httpRequest) {
         User user = getCurrentUser();
+        String resolvedFrontendBaseUrl = resolveFrontendBaseUrl(origin, referer, httpRequest);
         String[] profileFromAddress = parseNameAndPhone(request.getAddress());
         Order order = Order.builder()
                 .user(user)
@@ -101,7 +109,11 @@ public class OrderService {
         cartItemRepository.deleteByUserId(user.getId());
 
         try {
-            emailService.sendHtmlEmail(user.getEmail(), "Order Confirmed - #" + order.getId(), buildOrderConfirmationHtml(user, order));
+            emailService.sendHtmlEmail(
+                    user.getEmail(),
+                    "Order Confirmed - #" + order.getId(),
+                    buildOrderConfirmationHtml(user, order, resolvedFrontendBaseUrl)
+            );
         } catch (Exception e) {
             // Do not fail order placement if email delivery fails.
             System.err.println("Order email failed: " + e.getMessage());
@@ -110,8 +122,8 @@ public class OrderService {
         return toDto(order);
     }
 
-    private String buildOrderConfirmationHtml(User user, Order order) {
-        String orderLink = frontendBaseUrl + "/#/orders/" + order.getId();
+    private String buildOrderConfirmationHtml(User user, Order order, String frontendBaseUrlForEmail) {
+        String orderLink = frontendBaseUrlForEmail + "/#/orders/" + order.getId();
         return "<div style='font-family: Arial, sans-serif; color: #111827; line-height: 1.6;'>"
                 + "<h2 style='margin:0 0 12px 0;'>Order Confirmed - #" + order.getId() + "</h2>"
                 + "<p>Hello " + user.getName() + ",</p>"
@@ -151,6 +163,35 @@ public class OrderService {
                 ? "<p style='margin-top:14px;'>Your cancellation has been confirmed. If payment was already captured, refund processing may take 3-7 business days depending on your bank.</p>"
                 : "")
                 + "</div>";
+    }
+
+    private String resolveFrontendBaseUrl(String origin, String referer, HttpServletRequest httpRequest) {
+        if (StringUtils.hasText(origin)) {
+            return origin.replaceAll("/$", "");
+        }
+
+        if (StringUtils.hasText(referer)) {
+            String trimmed = referer.replaceAll("/$", "");
+            int hashIdx = trimmed.indexOf("/#/");
+            if (hashIdx > 0) {
+                return trimmed.substring(0, hashIdx);
+            }
+            int pathIdx = trimmed.indexOf('/', trimmed.indexOf("://") + 3);
+            if (pathIdx > -1) {
+                return trimmed.substring(0, pathIdx);
+            }
+            return trimmed;
+        }
+
+        if (httpRequest != null) {
+            String forwardedProto = httpRequest.getHeader("X-Forwarded-Proto");
+            String forwardedHost = httpRequest.getHeader("X-Forwarded-Host");
+            if (StringUtils.hasText(forwardedProto) && StringUtils.hasText(forwardedHost)) {
+                return (forwardedProto + "://" + forwardedHost).replaceAll("/$", "");
+            }
+        }
+
+        return frontendBaseUrl.replaceAll("/$", "");
     }
 
     private String formatCurrency(BigDecimal amount) {

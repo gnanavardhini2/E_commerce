@@ -3,6 +3,7 @@ package com.example.backend.controller;
 import com.example.backend.dto.OrderDto;
 import com.example.backend.dto.PlaceOrderRequest;
 import com.example.backend.service.OrderService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,13 @@ public class OrderController {
     // User: Place order
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<OrderDto> placeOrder(@RequestBody @Valid PlaceOrderRequest request) {
-        return ResponseEntity.ok(orderService.placeOrder(request));
+    public ResponseEntity<OrderDto> placeOrder(
+            @RequestBody @Valid PlaceOrderRequest request,
+            HttpServletRequest httpRequest,
+            @RequestHeader(value = "Origin", required = false) String origin,
+            @RequestHeader(value = "Referer", required = false) String referer
+    ) {
+        return ResponseEntity.ok(orderService.placeOrder(request, origin, referer, httpRequest));
     }
 
     // User: Get order history

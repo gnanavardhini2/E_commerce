@@ -32,10 +32,36 @@ const getStatusMeta = (status: string) => {
 export default function OrderDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { orders } = useShop();
+  const { orders, refreshOrders } = useShop();
+  const [hasAttemptedRefresh, setHasAttemptedRefresh] = React.useState(false);
   const order = orders.find((o) => String(o.id) === id);
   const statusMeta = order ? getStatusMeta(order.status) : null;
   const normalizedStatus = order ? normalizeStatus(order.status) : "";
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!id || !token || order || hasAttemptedRefresh) return;
+
+    const load = async () => {
+      try {
+        await refreshOrders();
+      } finally {
+        setHasAttemptedRefresh(true);
+      }
+    };
+
+    load();
+  }, [id, order, hasAttemptedRefresh, refreshOrders]);
+
+  if (!order && !hasAttemptedRefresh && localStorage.getItem('token')) {
+    return (
+      <div className="home-bg user-shell" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="surface-card" style={{ padding: 30, fontWeight: 700, color: '#334155' }}>
+          Loading order details...
+        </div>
+      </div>
+    );
+  }
 
   if (!order) {
     return (
