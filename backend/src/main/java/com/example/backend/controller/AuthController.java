@@ -44,7 +44,7 @@ public class AuthController {
         try {
             User user = userService.register(request);
             // Send registration email
-            emailService.sendEmail(user.getEmail(), "Welcome to VardhiniChaiCart!", "Thank you for registering, " + user.getName() + "!");
+            emailService.sendEmail(user.getEmail(), "Welcome to Vardhininanicart!", "Thank you for registering, " + user.getName() + "!");
             UserDto userDto = new UserDto();
             userDto.setId(user.getId());
             userDto.setName(user.getName());
@@ -101,7 +101,7 @@ public class AuthController {
 
             tokenOpt.ifPresent(token -> {
                 String resetLink = baseUrl + "/#/reset-password?token=" + token;
-                String subject = "Reset your VardhiniChaiCart password";
+                String subject = "Reset your Vardhininanicart password";
                 String html = """
                         <div style=\"font-family:Arial,sans-serif;line-height:1.6;color:#0f172a\">
                           <h2 style=\"margin:0 0 12px;\">Password Reset Request</h2>

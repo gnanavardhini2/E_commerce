@@ -54,7 +54,7 @@ const ForgotPasswordPage: React.FC = () => {
             <Box sx={{ display: 'flex', alignItems: 'center', mr: 1, color: '#2563eb' }}>
               <LocalCafeIcon sx={{ fontSize: 18 }} />
             </Box>
-            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#111827' }}>VardhiniChaiCart</Typography>
+            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#111827' }}>Vardhininanicart</Typography>
           </Box>
           <Typography sx={{ fontWeight: 800, textAlign: 'center', mb: 0.5, color: '#111827', fontSize: 34 }}>
             Forgot Password
@@ -117,7 +117,7 @@ const ForgotPasswordPage: React.FC = () => {
           </form>
         </Paper>
         <Typography sx={{ textAlign: 'center', mt: 1.5, color: '#6b7280', fontSize: 12.5, fontWeight: 600 }}>
-          Secured by VardhiniChaiCart
+          Secured by Vardhininanicart
         </Typography>
       </Container>
     </Box>

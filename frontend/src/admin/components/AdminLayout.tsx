@@ -45,7 +45,7 @@ export default function AdminLayout() {
   const drawer = (
     <div>
       <Box sx={{ p: 2, fontWeight: 900, fontSize: 22, color: 'primary.main', letterSpacing: 1 }}>
-        Admin Panel
+        Vardhininanicart Admin
       </Box>
       <Divider />
       <List>
@@ -134,7 +134,7 @@ export default function AdminLayout() {
               </IconButton>
             )}
             <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 800, color: 'primary.main', letterSpacing: 1 }}>
-              E-Commerce Admin
+              Vardhininanicart Admin
             </Typography>
             <Typography sx={{ mr: 2, fontWeight: 700, color: 'text.secondary' }}>
               {adminEmail}

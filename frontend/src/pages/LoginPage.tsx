@@ -165,7 +165,7 @@ const LoginPage: React.FC = () => {
             <Box sx={{ display: 'flex', alignItems: 'center', mr: 1, color: '#2563eb' }}>
               <LocalCafeIcon sx={{ fontSize: 18 }} />
             </Box>
-            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#111827' }}>VardhiniChaiCart</Typography>
+            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#111827' }}>Vardhininanicart</Typography>
           </Box>
           <Typography sx={{ textAlign: 'center', color: '#111827', mb: 0.5, fontSize: 34, fontWeight: 800 }}>
             Welcome Back
@@ -365,7 +365,7 @@ const LoginPage: React.FC = () => {
         </Box>
       </Paper>
       <Typography sx={{ textAlign: 'center', mt: 1.5, color: '#6b7280', fontSize: 12.5, fontWeight: 600 }}>
-        Secured by VardhiniChaiCart
+        Secured by Vardhininanicart
       </Typography>
       </Box>
     </Box>

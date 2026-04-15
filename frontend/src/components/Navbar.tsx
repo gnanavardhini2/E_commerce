@@ -29,7 +29,7 @@ const Navbar = () => {
       <Toolbar sx={{ minHeight: 72, px: { xs: 2, md: 3 } }}>
         <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 800, letterSpacing: 0.1, display: 'flex', alignItems: 'center', gap: 1 }}>
           <LocalCafeIcon sx={{ color: '#38bdf8', fontSize: 22 }} />
-          <span>VardhiniChaiCart</span>
+          <span>Vardhininanicart</span>
         </Typography>
         {isAuthenticated && (
           <>

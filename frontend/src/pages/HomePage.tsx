@@ -40,7 +40,7 @@ export default function HomePage() {
     <div className="home-bg">
       {/* Hero Section */}
       <section className="hero fade-in">
-        <h1 className="hero-title">Welcome to VardhiniChaiCart</h1>
+        <h1 className="hero-title">Welcome to Vardhininanicart</h1>
         <p className="hero-subtitle">Discover quality products, everyday value, and fast delivery.</p>
         <button className="hero-btn" onClick={() => navigate("/products")}>Shop Now</button>
       </section>

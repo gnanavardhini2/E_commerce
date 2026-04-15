@@ -7,11 +7,11 @@ export default function Footer() {
       <div className="footer-container">
         <div className="footer-section">
           <h4>About</h4>
-          <p>VardhiniChaiCart is your trusted destination for quality products, smart pricing, and fast, reliable delivery.</p>
+          <p>Vardhininanicart is your trusted destination for quality products, smart pricing, and fast, reliable delivery.</p>
         </div>
         <div className="footer-section">
           <h4>Contact</h4>
-          <p>Email: support@vardhinichaicart.com</p>
+          <p>Email: support@vardhininanicart.com</p>
           <p>Phone: +91 98765 43210</p>
         </div>
         <div className="footer-section">
@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="footer-bottom">© {new Date().getFullYear()} VardhiniChaiCart. All rights reserved.</div>
+      <div className="footer-bottom">© {new Date().getFullYear()} Vardhininanicart. All rights reserved.</div>
     </footer>
   );
 }
